@@ -1,2 +1,8 @@
-venv/**
 .vscode
+
+#venv folde
+venv/**
+
+# python caches
+__pycache__/
+.pytest_cache/
