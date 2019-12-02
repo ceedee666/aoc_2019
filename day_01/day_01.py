@@ -1,5 +1,5 @@
 def calculate_fuel(mass):
-    return int(mass/3) - 2
+    return (mass // 3) - 2
 
 def calculate_fuel_for_modules(modules):
     return sum(map(calculate_fuel, modules))
