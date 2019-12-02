@@ -24,12 +24,9 @@ def calculate_noun_and_verb(program):
             new_program[1] = noun
             new_program[2] = verb
 
-            try:
-                result = execute_intcode(new_program)
-                if result[0] == PART2_MAGIC_NUMBER:
-                    return noun,verb
-            except IndexError as e:
-                pass
+            result = execute_intcode(new_program)
+            if result[0] == PART2_MAGIC_NUMBER:
+                return noun,verb
 
 
 if __name__ == "__main__":
