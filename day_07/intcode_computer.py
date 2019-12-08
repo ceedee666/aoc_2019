@@ -14,8 +14,7 @@ PARA_MODE = {
     'IMM' : 1
 }    
 
-def execute_intcode(program, input=[0]):
-    instruction_pointer = 0
+def execute_intcode(program, input=[0], instruction_pointer = 0):
     output = []
     hcf = False
 
@@ -23,6 +22,7 @@ def execute_intcode(program, input=[0]):
         opcode_details = analyse_opcode(program[instruction_pointer])
         if opcode_details[0] == OPCODES["HCF"]:
             hcf = True
+            output.append(input[0])
         else:
             operand_1_address, operand_2_address, operand_3_address = calc_operand_addresses(instruction_pointer, opcode_details, program)
             new_instruction_pointer = instruction_pointer
@@ -37,7 +37,7 @@ def execute_intcode(program, input=[0]):
                 program[operand_1_address] = input.pop(0)
 
             elif opcode_details[0] == OPCODES["OUT"]:
-                return program, program[operand_1_address], hcf
+                output.append(program[operand_1_address])
 
             elif opcode_details[0] == OPCODES["JIT"]:
                 if program[operand_1_address] != 0:
@@ -63,7 +63,10 @@ def execute_intcode(program, input=[0]):
                 instruction_pointer = calc_next_ip(instruction_pointer, opcode_details[0])
             else:
                 instruction_pointer = new_instruction_pointer
-    return program, output, hcf
+
+            if output:
+                return program, output, instruction_pointer, hcf
+    return program, output, instruction_pointer, hcf
 
 def calc_next_ip(instruction_pointer, opcode):
     if opcode in (OPCODES["INP"], OPCODES["OUT"]):
