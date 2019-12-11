@@ -76,3 +76,9 @@ def test_find_best_position():
     input = input.split("\n")
     result = best_pos(input)
     assert result[0] == (11,13,"#")
+
+
+def test_generate_all_target_coordinates():
+    target_points = generate_all_target_coordinates((1,1,'#'), 3, 3)
+    assert target_points == [(1,0), (2,0), (2,1), (2,2), (1,2), (0,2), (0,1), (0,0)]
+
