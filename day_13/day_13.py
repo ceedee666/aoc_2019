@@ -38,4 +38,3 @@ if __name__ == "__main__":
     program = parse_incode_file("./day_13/intcode_game.txt")
     program[0] = 2
     output = execute_arcade_game_step(program)
-    1+1
